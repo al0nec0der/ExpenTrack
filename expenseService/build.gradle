@@ -6,7 +6,9 @@ plugins {
 
 group = 'com.expense'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '21'
+sourceCompatibility = '17'
+
+
 
 configurations {
     compileOnly {

@@ -13,11 +13,12 @@ group = 'com.expen'
 version = '0.0.1-SNAPSHOT'
 
 java {
-	sourceCompatibility = JavaVersion.VERSION_21
-	targetCompatibility = JavaVersion.VERSION_21
+sourceCompatibility = '17'
+targetCompatibility = '17'
+
 
 	toolchain {
-		languageVersion = JavaLanguageVersion.of(21)
+		languageVersion = JavaLanguageVersion.of(17)
 	}
 }
 application {
