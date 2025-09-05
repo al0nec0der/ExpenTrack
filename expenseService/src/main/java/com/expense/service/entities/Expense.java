@@ -3,7 +3,6 @@ package com.expense.service.entities;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,8 +28,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class Expense
-{
+public class Expense {
 
     @Id
     @Column(name = "id")
@@ -65,5 +63,4 @@ public class Expense
             this.createdAt = new Timestamp(Instant.now().toEpochMilli());
         }
     }
-
 }

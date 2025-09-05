@@ -77,7 +77,7 @@ services:
       KAFKA_HOST: kafka
       KAFKA_PORT: 9092 # <-- USE THE STANDARD KAFKA PORT
 
-  expenseservice: # <- THIS MUST BE PRESENT!
+  expenseservice:
     build: ./expenseService
     container_name: expenseservice
     restart: on-failure
@@ -90,11 +90,13 @@ services:
         condition: service_started
     environment:
       MYSQL_HOST: mysql
+      MYSQL_PORT: 3306          # ← ADD THIS LINE
       MYSQL_DB: expenseservice
       MYSQL_USER: root
       MYSQL_PASSWORD: password
       KAFKA_HOST: kafka
       KAFKA_PORT: 9092
+
 
   dsservice: # <- THIS MUST BE PRESENT!
     build: ./dsService

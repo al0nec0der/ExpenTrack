@@ -8,7 +8,8 @@ WORKDIR /app
 COPY build/libs/service-0.0.1-SNAPSHOT.jar /app/service-0.0.1-SNAPSHOT.jar
 
 # Expose the port that your Java service listens on
-EXPOSE 9820
+EXPOSE 9811
+
 
 # Set the entry point for the container
 ENTRYPOINT ["java", "-jar", "/app/service-0.0.1-SNAPSHOT.jar"]
