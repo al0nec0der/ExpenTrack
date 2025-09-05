@@ -43,12 +43,14 @@ public class TokenController
             RefreshToken refreshToken = refreshTokenService.createRefreshToken(authRequestDTO.getUsername());
             String userId = userDetailsService.getUserByUsername(authRequestDTO.getUsername());
 
-            if(Objects.nonNull(userId) && Objects.nonNull(refreshToken)){
+            if (Objects.nonNull(userId) && Objects.nonNull(refreshToken)) {
                 return new ResponseEntity<>(JwtResponseDTO.builder()
                         .accessToken(jwtService.GenerateToken(authRequestDTO.getUsername()))
                         .token(refreshToken.getToken())
+                        .userId(userId)
                         .build(), HttpStatus.OK);
             }
+
         }
         return new ResponseEntity<>("Exception in User Service", HttpStatus.INTERNAL_SERVER_ERROR);
     }
