@@ -17,7 +17,7 @@ services:
       - zookeeper
     environment:
       KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
       # THE CORRECT, SIMPLE LISTENER CONFIGURATION
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
@@ -28,13 +28,13 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: "password"
     ports:
       - "3306:3306"
     volumes:
       - mysql-data:/var/lib/mysql
     healthcheck:
-      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -76,6 +76,36 @@ services:
       MYSQL_PASSWORD: password
       KAFKA_HOST: kafka
       KAFKA_PORT: 9092 # <-- USE THE STANDARD KAFKA PORT
+
+  expenseservice: # <- THIS MUST BE PRESENT!
+    build: ./expenseService
+    container_name: expenseservice
+    restart: on-failure
+    ports:
+      - "9811:9811"
+    depends_on:
+      mysql:
+        condition: service_healthy
+      kafka:
+        condition: service_started
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_DB: expenseservice
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
+      KAFKA_HOST: kafka
+      KAFKA_PORT: 9092
+
+  dsservice: # <- THIS MUST BE PRESENT!
+    build: ./dsService
+    container_name: dsservice
+    restart: on-failure
+    ports:
+      - "8010:8010"
+    environment:
+      OPENAI_API_KEY: your_actual_api_key
+      KAFKA_HOST: kafka
+      KAFKA_PORT: 9092
 
 volumes:
   mysql-data:
