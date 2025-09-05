@@ -1,14 +1,12 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.2.2'
-    id 'io.spring.dependency-management' version '1.1.4'
+    id 'org.springframework.boot' version '3.1.0'
+    id 'io.spring.dependency-management' version '1.1.0'
 }
 
 group = 'com.expense'
 version = '0.0.1-SNAPSHOT'
-java {
-    sourceCompatibility = '21'
-}
+sourceCompatibility = '21'
 
 configurations {
     compileOnly {
@@ -21,36 +19,43 @@ repositories {
 }
 
 dependencies {
-    // Spring Boot Starters
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    // Core Spring Boot Dependencies
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.kafka:spring-kafka'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    
+    // CRITICAL: Add Spring Boot Actuator for health endpoints
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     
-    // Database
-    runtimeOnly 'mysql:mysql-connector-java:8.0.33'
-    testRuntimeOnly 'com.h2database:h2' // H2 for testing
+    // Kafka Support
+    implementation 'org.springframework.kafka:spring-kafka'
     
-    // Lombok
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
+    // Database Driver
+    implementation 'mysql:mysql-connector-java:8.0.33'
     
-    // Jackson
+    // JSON Processing
+    implementation 'com.fasterxml.jackson.core:jackson-core'
     implementation 'com.fasterxml.jackson.core:jackson-databind'
     
-    // Apache Commons
-    implementation 'org.apache.logging.log4j:log4j-api'
-    implementation 'org.apache.logging.log4j:log4j-core'
+    // Lombok for reducing boilerplate
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
     
     // Testing
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.kafka:spring-kafka-test'
-    testImplementation 'org.testcontainers:junit-jupiter'
-    testImplementation 'org.testcontainers:kafka'
 }
 
 tasks.named('test') {
     useJUnitPlatform()
-    // Set test profile
-    systemProperty 'spring.profiles.active', 'test'
+}
+
+// Ensure proper JAR naming for Docker
+jar {
+    enabled = false
+    archiveClassifier = '' // This removes the 'plain' suffix
+}
+
+bootJar {
+    enabled = true
+    archiveClassifier = '' // This removes the 'plain' suffix
 }
