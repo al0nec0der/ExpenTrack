@@ -14,19 +14,6 @@ This project demonstrates a robust backend system featuring secure authenticatio
 * **☁️ Automated Cloud Deployment**: Features a CI/CD pipeline using GitHub Actions to automatically build, containerize, and deploy the authentication service to AWS via a CloudFormation template.
 * **🐳 Containerized Environment**: The entire application stack is containerized with Docker and orchestrated using Docker Compose for consistent development and easy setup.
 
-## 🏗️ System Architecture
-
-The application is composed of four main microservices that communicate through a Kafka message broker.
-
-1.  **Auth Service**: Handles user registration and login. Upon successful signup, it publishes user details to the `user_service` topic on Kafka.
-2.  **User Service**: Subscribes to the `user_service` topic to create and manage user profile data in its own database.
-3.  **DS Service (AI Service)**: Receives raw SMS text from the user. It uses an LLM to parse the text, extracts structured expense data, and publishes it to the `expense_service` topic.
-4.  **Expense Service**: Subscribes to the `expense_service` topic to log the parsed expense details into the database, associating them with the correct user.
-
-
-[![KuGknj4.md.png](https://iili.io/KuGknj4.md.png)](https://freeimage.host/i/KuGknj4)
-
-
 ## 🛠️ Tech Stack
 
 | Category              | Technology                                                                                                                                                                                                                                                                          |
@@ -36,6 +23,23 @@ The application is composed of four main microservices that communicate through 
 | **Messaging Queue** | ![Apache Kafka](https://img.shields.io/badge/Apache_Kafka-231F20?style=for-the-badge&logo=apachekafka&logoColor=white)                                                                                                                                                                 |
 | **AI & Machine Learning** | ![OpenAI](https://img.shields.io/badge/OpenAI-412991?style=for-the-badge&logo=openai&logoColor=white) ![LangChain](https://img.shields.io/badge/LangChain-000000?style=for-the-badge&logo=langchain&logoColor=white)                                                               |
 | **DevOps & Cloud** | ![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white) ![AWS](https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazon-aws&logoColor=white) ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)                               |
+
+
+## 🏗️ System Architecture
+
+The application is composed of four main microservices that communicate through a Kafka message broker.
+
+1.  **Auth Service**: Handles user registration and login. Upon successful signup, it publishes user details to the `user_service` topic on Kafka.
+2.  **User Service**: Subscribes to the `user_service` topic to create and manage user profile data in its own database.
+3.  **DS Service (AI Service)**: Receives raw SMS text from the user. It uses an LLM to parse the text, extracts structured expense data, and publishes it to the `expense_service` topic.
+4.  **Expense Service**: Subscribes to the `expense_service` topic to log the parsed expense details into the database, associating them with the correct user.
+
+<img width="2000" height="2048" alt="Picsart_25-09-14_20-40-13-806" src="https://github.com/user-attachments/assets/0d6a92ef-9a24-4090-bd58-9373b1870236" />
+
+
+![PhotoFix20250914202956](https://github.com/user-attachments/assets/ceef958a-175e-474b-9e42-0669019bd585)
+
+
 
 ## 📦 Installation & Setup Guide
 
@@ -200,3 +204,4 @@ This project is licensed under the MIT License. See the `LICENSE` file for detai
   * **LinkedIn**: [linkedin.com/in/codewithteja](https://linkedin.com/in/codewithteja)
 
 <!-- end list -->
+
