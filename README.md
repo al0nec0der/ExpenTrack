@@ -24,8 +24,8 @@ The application is composed of four main microservices that communicate through 
 4.  **Expense Service**: Subscribes to the `expense_service` topic to log the parsed expense details into the database, associating them with the correct user.
 
 
+[![KuGknj4.md.png](https://iili.io/KuGknj4.md.png)](https://freeimage.host/i/KuGknj4)
 
-![A diagram showing the flow of data between the different microservices, Kafka, and the database.](https://i.imgur.com/uQyYjFf.png)
 
 ## 🛠️ Tech Stack
 
